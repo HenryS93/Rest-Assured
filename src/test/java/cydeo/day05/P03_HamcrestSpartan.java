@@ -2,14 +2,14 @@ package cydeo.day05;
 
 import cydeo.Utilities.SpartanTestBase;
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
+import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 
-public class P0_HamcrestSpartan extends SpartanTestBase {
+public class P03_HamcrestSpartan extends SpartanTestBase {
 
     @DisplayName("GET Single Spartan With Hemcrest")
     @Test
@@ -33,25 +33,31 @@ public class P0_HamcrestSpartan extends SpartanTestBase {
         //Then().log().all()  ->> it will give all information about your request (path. query params, URI , Body ect
         //ifValidateFails()  ->>  it will print all response if one of the validation FAILS
 
-        Response response = given().accept(ContentType.JSON).and().pathParam("id", 15).when().get("/api/spartans/{id}").prettyPeek()
+        JsonPath jsonPath = given().accept(ContentType.JSON).and().pathParam("id", 15).when().get("/api/spartans/{id}").prettyPeek()
                 .then().log().ifValidationFails().statusCode(200)
                 .and().contentType("application/json")
 //                .assertThat() // these are again syntetic sugar just to increase readability
                 .and().body("id", is(15), "name", is("Meta"), "gender", is("Female"), "phone", is(1938695106))
-                .extract().response();
+                .extract().response().jsonPath();
 
-        int id = response.path("id");
+        //ANSWERS WITH RESPONSE VARIABLE
+//        int id = response.path("id");
+//        System.out.println("id = " + id);
+//
+//        String name = response.path("name");
+//        System.out.println("name = " + name);
+//
+//        String gender = response.path("gender");
+//        System.out.println("gender = " + gender);
+//
+//
+//        int phone = response.path("phone");
+//        System.out.println("phone = " + phone);
+
+        //ANSWERS WITH JSONPATH() AFTER RESPONSE
+
+        int id = jsonPath.getInt("id");
         System.out.println("id = " + id);
-
-        String name = response.path("name");
-        System.out.println("name = " + name);
-
-        String gender = response.path("gender");
-        System.out.println("gender = " + gender);
-
-
-        int phone = response.path("phone");
-        System.out.println("phone = " + phone);
 
 
             /* How to print RESPONSE BODY
@@ -73,7 +79,7 @@ public class P0_HamcrestSpartan extends SpartanTestBase {
           to get related data that you wanna verify
         */
 
-        
+
 
     }
 
