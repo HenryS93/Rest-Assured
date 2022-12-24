@@ -57,13 +57,32 @@ public class P01_HRDeserilization extends HrTestBase {
             System.out.println("eachmap = " + eachmap);
         }
 
-         System.out.println("============== FIRST LOCATION FROM ALL LOCATIONS ============== " );
-         System.out.println(allLocationMap.get(0));
+         System.out.println("============== FIRST LOCATION_ID FROM ALL LOCATIONS ============== " );
+         System.out.println(allLocationMap.get(0).get("location_id"));
 
-        System.out.println("============== GET FIRST LOCATION ID ============== " );
-        System.out.println(allLocationMap.get(0).get("location_id"));
+        System.out.println("============== GET FIRST LOCATION COUNTRY_ID ============== " );
+        System.out.println(allLocationMap.get(0).get("country_id"));
 
         System.out.println("============== GET FIRST LOCATION FIRST LINK ============== " );
+        System.out.println(" allLocationMap.get(0).get(\"link[0]\")= " +  allLocationMap.get(0).get("links"));
+
+        List<Map<String,Object>> links = (List<Map<String, Object>>) allLocationMap.get(0).get("links");
+        System.out.println(links.get(0).get("href"));
+
+        System.out.println("========================================LAST LOCATION ID FROM ALL LOCATIONS==================================");
+        System.out.println("allLocationMap.get(allLocationMap.size()-1).get(\"location_id\")= "+allLocationMap.get(allLocationMap.size()-1).get("location_id"));
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 
