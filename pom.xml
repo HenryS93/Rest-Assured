@@ -33,7 +33,12 @@
             <version>2.13.0</version>
         </dependency>
 
-
+        <!-- - Instead of keep writing getter/setter/constructor/toString......boilerPlates -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+        </dependency>
     </dependencies>
 
 </project>
