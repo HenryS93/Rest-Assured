@@ -2,9 +2,14 @@ package cydeo.day07;
 
 import static io.restassured.RestAssured.*;
 
+
 import cydeo.Utilities.CydeoTrainingTestBase;
-import org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.*;
+
+import cydeo.pojo.StudentPractice;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -38,23 +43,18 @@ public class P01_CydeoTrainingDeserializationPOJO extends CydeoTrainingTestBase 
     public void test1(){
 
 
-                given().accept(ContentType.JSON).pathParam("id",2)
+        JsonPath jsonPath = given().accept(ContentType.JSON).pathParam("id", 2)
                 .when().get("/student/{id}").prettyPeek()
                 .then().statusCode(200)
-                .contentType("application/json;charset=UTF-8");
+                .contentType("application/json;charset=UTF-8")
+                .header("Date",notNullValue())
+                .header("server",is("envoy"))
+                .extract().jsonPath();
 
 
+        StudentPractice studentWithId2 = jsonPath.getObject("students[1]", StudentPractice.class);
+        System.out.println("studentWithId2 = " + studentWithId2);
 
-
-
-
-
-
-
-
-
-
-
-}
+    }
 
 }
