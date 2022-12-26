@@ -8,8 +8,14 @@ public class Search {
     private List<Spartan> content;
     private int totalElement;
 
+
+
     public List<Spartan> getContent() {
         return content;
+
+        //Search Class has a relation with Spartan Class
+        //It is called as HAS A Relationship
+
     }
 
     public void setContent(List<Spartan> content) {

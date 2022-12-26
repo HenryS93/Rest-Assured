@@ -119,6 +119,43 @@ public class P02_SpartanDeserilizationPOJO extends SpartanTestBase {
 
     }
 
+    @DisplayName("GET Spartans from search endpoint for deserialization to List Of Spartans")
+    @Test
+    public void test() {
+
+        Response response = given().accept(ContentType.JSON).when().get("/api/spartans/search")
+                .then().statusCode(200).extract().response();
+
+
+        JsonPath jsonPath = response.jsonPath();
+
+        List<Spartan> allSpartans = jsonPath.getList("content", Spartan.class);
+        System.out.println("allSpartans = " + allSpartans);
+
+        for (Spartan eachSpartan : allSpartans) {
+
+            System.out.println("eachSpartan = " + eachSpartan);
+
+        }
+
+
+        System.out.println(allSpartans.get(0).getName());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
 
 
 
